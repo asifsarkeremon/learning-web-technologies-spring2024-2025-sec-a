@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOB Validation</title>
+</head>
+<body>
+    <form onsubmit="return validate()">
+        <fieldset>
+            <legend>Date of Birth</legend>
+            
+            dd  mm  yyyy <br>
+            <input type="text" name="dd" value="" id="dd" style="width: 25px;"/>/
+            <input type="text" name="mm" value="" id="mm" style="width: 25px;"/>/ 
+            <input type="text" name="yyyy" value="" id="yyyy" style="width: 40px;"/> 
+            <p id="msg"></p>
+            <hr>
+            <input type="submit" name="submit" id="submit" value="Submit" >
+        </fieldset>
+    </form>
+    <script>
+        
+        function validate() {
+            let dd = document.getElementById('dd').value;
+            let mm = document.getElementById('mm').value;
+            let yyyy = document.getElementById('yyyy').value;
+            let msg = document.getElementById('msg');
+
+            let day = parseInt(dd, 10);
+            let month = parseInt(mm, 10);
+            let year = parseInt(yyyy, 10);
+            
+            if (dd ==='' || mm ==='' || yyyy ==='') {
+                msg.innerHTML = "Cannot be empty.";
+                msg.style.color = 'red';
+                return false;
+            }
+            else{
+
+                if ((dd < 1 || day > 31) || (mm < 1 || mm > 12) || (yyyy < 1900 || yyyy > 2016)) {
+                    msg.innerHTML = "Must be a valid number (dd: 0-31, mm: 1-12, yyyy: 1900-2016)";
+                    msg.style.color = 'red';
+                    return false;
+                }
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>

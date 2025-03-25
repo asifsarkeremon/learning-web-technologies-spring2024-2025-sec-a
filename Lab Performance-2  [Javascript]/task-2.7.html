@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkbox Validation</title>
+</head>
+<body>
+    <form onsubmit="return validate()">
+        <fieldset>
+            <legend>Profile Picture</legend>
+            User ID <input type="text" id="username" name="username" value=""><br>
+            Picture <input type="file" id="file" name="file"/>
+            <p id="msg"></p><hr>
+            <input type="submit" name="submit" id="submit" value="Submit" >
+        </fieldset>
+    </form>
+    <script>
+        function validate() {
+            let username = document.getElementById('username').value.trim();
+            let file = document.getElementById('file');
+            let msg = document.getElementById('msg');
+
+            if (username === "" || parseInt(username) <= 0) {
+                msg.innerHTML = "UserId cannot be empty and has to be a positive number.";
+                msg.style.color = 'red';
+                return false;
+            }
+
+            if (file.files.length === 0) {
+                msg.innerHTML = "Picture cannot be empty";
+                msg.style.color = 'red';
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name Validation</title>
+</head>
+<body>
+    <form onsubmit="return validate()">
+        <fieldset>
+            <legend>Name</legend>
+            <input type="text" name="name" id="name" value="">
+            <p id="msg"></p>
+            <input type="submit" name="submit" id="submit" value="Submit" >
+        </fieldset>
+    </form>
+    <script>
+        
+        function validate() {
+            let name = document.getElementById('name').value;
+            let msg = document.getElementById('msg');
+            
+            if (name === "") {
+                msg.innerHTML = "Please type your name!";
+                msg.style.color = 'red';
+                return false;
+            }
+
+            let words = name.split(" ");
+            if (words.length < 2) {
+                msg.innerHTML = "Name must contain at least two words.";
+                msg.style.color = 'red';
+                return false;
+            }
+            
+            let letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            let validChars = letters + '.-';
+
+            for (let word of words) {
+                if (!letters.includes(word.charAt(0))) {
+                    msg.innerHTML = "All words must start with a letter.";
+                    msg.style.color = 'red';
+                    return false;
+                }
+                
+                for (let char of word) {
+                    if (!validChars.includes(char)) {
+                        msg.innerHTML = "Input can only contain letters (a-z, A-Z), periods (.), and dashes (-).";
+                        msg.style.color = 'red';
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>
